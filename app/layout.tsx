@@ -1,7 +1,7 @@
 import './globals.css'
 import type { ReactNode } from 'react'
 import Header from '../components/Header'
-import Footer from '../components/footer'
+import Footer from '../components/Footer'
 
 export const metadata = {
   title: process.env.NEXT_PUBLIC_SITE_NAME || 'Portfolio',
