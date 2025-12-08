@@ -1,6 +1,7 @@
 import './globals.css'
 import type { ReactNode } from 'react'
 import Header from '../components/Header'
+import Footer from '../components/footer'
 
 export const metadata = {
   title: process.env.NEXT_PUBLIC_SITE_NAME || 'Portfolio',
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="bg-sky-50 text-slate-800 min-h-screen">
         <Header />
         <main className="max-w-[1100px] mx-auto p-6">{children}</main>
+         <Footer />
       </body>
     </html>
   )
