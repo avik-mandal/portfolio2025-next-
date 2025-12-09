@@ -88,7 +88,7 @@ function FoldedAMesh(props: { hovered: boolean }) {
         color={"#c9d6e2"}
         metalness={0.96}
         roughness={0.16}
-        clearcoat={0.8}
+        clearcoat={0.8} 
         clearcoatRoughness={0.03}
         reflectivity={0.9}
         envMapIntensity={1.2}
