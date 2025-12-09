@@ -1,11 +1,12 @@
 // global.d.ts
-// Put at the repo root or in src/ so TS picks it up automatically.
+// Project-wide JSX types for @react-three/fiber
 
 import type { ThreeElements } from "@react-three/fiber";
 
 declare global {
   namespace JSX {
-    // Merge R3F's ThreeElements into global JSX.IntrinsicElements
+    // Merge r3f element typings into global JSX so tags like
+    // <mesh />, <meshPhysicalMaterial />, <ambientLight />, <group />, etc. are recognized.
     interface IntrinsicElements extends ThreeElements {}
   }
 }
