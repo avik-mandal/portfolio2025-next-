@@ -1,31 +1,35 @@
-// src/app/about/page.tsx
-"use client";
+// components/About.tsx
+import React from "react";
 
-
-export default function AboutPage() {
+export default function About() {
   return (
-    <>
-      <main className="min-h-screen bg-gradient-to-b from-black via-[#050617] to-black text-white pt-24">
-        <section className="max-w-[1000px] mx-auto px-6 py-20">
-          <h2 className="text-3xl font-bold mb-4">About me</h2>
-          <p className="text-white/75 leading-relaxed mb-6">
-            I'm Avik — a frontend developer focused on building beautiful, usable
-            interfaces. I enjoy turning complex UX problems into clean, performant solutions.
-          </p>
+    <section id="about" className="relative py-32 px-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">About <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Me</span></h2>
+          <p className="text-gray-400 text-lg">Get to know me better</p>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white/3 p-6 rounded-xl border border-white/6">
-              <h3 className="font-semibold mb-2">Experience</h3>
-              <p className="text-white/70">Frontend development with React, Next.js, Tailwind and a bit of Node/Express.</p>
-            </div>
-
-            <div className="bg-white/3 p-6 rounded-xl border border-white/6">
-              <h3 className="font-semibold mb-2">Interests</h3>
-              <p className="text-white/70">UI/UX, animations, performance, and creating polished web apps.</p>
-            </div>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 backdrop-blur-sm hover:border-cyan-500/30 transition-all">
+            <div className="text-4xl mb-4">👨‍💻</div>
+            <h3 className="text-2xl font-bold mb-4">Who I Am</h3>
+            <p className="text-gray-400 leading-relaxed">
+              I'm a passionate frontend developer who loves turning complex problems into simple, beautiful interfaces.
+              With expertise in React, Next.js, and modern web technologies, I create experiences that users love.
+            </p>
           </div>
-        </section>
-      </main>
-    </>
+
+          <div className="p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 backdrop-blur-sm hover:border-cyan-500/30 transition-all">
+            <div className="text-4xl mb-4">🎯</div>
+            <h3 className="text-2xl font-bold mb-4">What I Do</h3>
+            <p className="text-gray-400 leading-relaxed">
+              I specialize in building responsive web applications with clean code and modern design.
+              From concept to deployment, I handle the entire development process with attention to detail and performance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

@@ -1,43 +1,38 @@
-// src/app/skills/page.tsx
-"use client";
-
-
+// components/Skills.tsx
+import React from "react";
 
 const skills = [
-  { name: "React", level: "Advanced" },
-  { name: "Next.js", level: "Advanced" },
-  { name: "TypeScript", level: "Intermediate" },
-  { name: "Tailwind CSS", level: "Advanced" },
-  { name: "GraphQL / REST", level: "Intermediate" },
-  { name: "Node / Express", level: "Intermediate" },
+  { name: "React", level: 90, color: "from-blue-500 to-cyan-400" },
+  { name: "Next.js", level: 88, color: "from-purple-500 to-pink-400" },
+  { name: "TypeScript", level: 75, color: "from-indigo-500 to-blue-400" },
+  { name: "Tailwind CSS", level: 92, color: "from-teal-500 to-emerald-400" },
+  { name: "Node.js", level: 70, color: "from-green-500 to-lime-400" },
+  { name: "GraphQL", level: 65, color: "from-pink-500 to-rose-400" },
 ];
 
-export default function SkillsPage() {
+export default function Skills() {
   return (
-    <>
+    <section id="skills" className="relative py-32 px-6 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">My <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Skills</span></h2>
+          <p className="text-gray-400 text-lg">Technologies I work with</p>
+        </div>
 
-      <main className="min-h-screen bg-black text-white pt-24">
-        <section className="max-w-[1100px] mx-auto px-6 py-20">
-          <h2 className="text-3xl font-bold mb-6">Skills</h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {skills.map((s) => (
-              <div key={s.name} className="p-4 rounded-lg bg-white/5 border border-white/6">
-                <h3 className="font-semibold text-lg">{s.name}</h3>
-                <p className="text-sm text-white/70 mt-1">{s.level}</p>
-
-                <div className="mt-3 h-2 bg-white/6 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full rounded-full bg-gradient-to-r from-sky-500 to-cyan-400`}
-                    style={{ width: s.level === "Advanced" ? "90%" : s.level === "Intermediate" ? "65%" : "35%" }}
-                  />
-                </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {skills.map((s) => (
+            <div key={s.name} className="group p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 backdrop-blur-sm hover:border-cyan-500/30 transition-all">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-bold">{s.name}</h3>
+                <span className="text-sm text-cyan-400">{s.level}%</span>
               </div>
-            ))}
-          </div>
-        </section>
-      </main>
-
-    </>
+              <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                <div className={`h-full bg-gradient-to-r ${s.color} rounded-full transition-all duration-1000 ease-out`} style={{ width: `${s.level}%` }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
