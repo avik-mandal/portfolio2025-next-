@@ -28,7 +28,7 @@ interface MenuItem {
   href: string;
 }
 
-export default function Header(): JSX.Element {
+export default function Header(): React.ReactNode {
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [active, setActive] = useState<string>("home");
@@ -507,7 +507,7 @@ export default function Header(): JSX.Element {
                     <span>{item.name}</span>
                     {isActive && (
                       <div style={{ animation: "scaleIn 0.3s ease-out" }}>
-                        <Sparkles size={14} className="text-cyan-400" />
+                        <Sparkles size={10} className="text-cyan-400" />
                       </div>
                     )}
                   </button>
@@ -554,7 +554,7 @@ export default function Header(): JSX.Element {
       `}</style>
 
       {/* Demo sections for scroll spy */}
-      <div className="pt-24 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      {/* <div className="pt-24 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
         {sections.map((id: string) => (
           <section
             key={id}
@@ -577,7 +577,7 @@ export default function Header(): JSX.Element {
             </div>
           </section>
         ))}
-      </div>
+      </div> */}
     </>
   );
 }

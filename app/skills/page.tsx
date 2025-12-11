@@ -1,4 +1,3 @@
-// components/Skills.tsx
 import React from "react";
 
 const skills = [
@@ -12,27 +11,71 @@ const skills = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative py-32 px-6 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent">
+    <section
+      id="skills"
+      className="relative py-28 px-6 "
+    >
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">My <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Skills</span></h2>
-          <p className="text-gray-400 text-lg">Technologies I work with</p>
+        {/* Header */}
+        <div className="text-center mb-14">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
+            My{" "}
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              Skills
+            </span>
+          </h2>
+          <p className="text-gray-400 text-lg">
+            Technologies I use to build modern web applications
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skills.map((s) => (
-            <div key={s.name} className="group p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 backdrop-blur-sm hover:border-cyan-500/30 transition-all">
+        {/* Skill Cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {skills.map((s, i) => (
+            <div
+              key={s.name}
+              className="group p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md 
+              hover:border-cyan-400/40 hover:shadow-lg hover:shadow-cyan-500/10 
+              transition-all duration-300 animate-fadeUp"
+              style={{ animationDelay: `${i * 0.15}s` }}
+            >
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-bold">{s.name}</h3>
-                <span className="text-sm text-cyan-400">{s.level}%</span>
+                <h3 className="text-xl font-semibold text-white">{s.name}</h3>
+                <span className="text-sm text-cyan-400 font-medium">
+                  {s.level}%
+                </span>
               </div>
-              <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-                <div className={`h-full bg-gradient-to-r ${s.color} rounded-full transition-all duration-1000 ease-out`} style={{ width: `${s.level}%` }} />
+
+              {/* Progress Bar */}
+              <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                <div
+                  className={`h-full bg-gradient-to-r ${s.color} rounded-full transition-all duration-[1500ms]`}
+                  style={{ width: `${s.level}%` }}
+                />
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Animations */}
+      <style>
+        {`
+          @keyframes fadeUp {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          .animate-fadeUp {
+            animation: fadeUp 0.6s ease-out forwards;
+          }
+        `}
+      </style>
     </section>
   );
 }
