@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from "react";
-import { Code2, Palette, Zap, Rocket, Check, ArrowRight, Star, TrendingUp, Users, Clock, DollarSign, Award } from "lucide-react";
+import { Code2, Palette, Zap, Rocket, Check, ArrowRight, Star, TrendingUp, Users, Clock, DollarSign, Award, X } from "lucide-react";
 
 type Service = {
   name: string;
