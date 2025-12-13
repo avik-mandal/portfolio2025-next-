@@ -552,32 +552,6 @@ export default function Header(): React.ReactNode {
           50% { opacity: 1; }
         }
       `}</style>
-
-      {/* Demo sections for scroll spy */}
-      {/* <div className="pt-24 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
-        {sections.map((id: string) => (
-          <section
-            key={id}
-            id={id}
-            className="min-h-screen flex items-center justify-center"
-            style={{
-              background: `radial-gradient(circle at ${Math.random() * 100}% ${Math.random() * 100}%, rgba(59, 243, 255, 0.05), transparent 50%)`,
-            }}
-          >
-            <div className="text-center">
-              <h2 className="text-5xl md:text-7xl font-black mb-4" style={{
-                background: "linear-gradient(135deg, #3bf3ff, #6dd5ed)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}>
-                {id.charAt(0).toUpperCase() + id.slice(1)}
-              </h2>
-              <p className="text-gray-400 text-lg">Section content goes here</p>
-            </div>
-          </section>
-        ))}
-      </div> */}
     </>
   );
 }
