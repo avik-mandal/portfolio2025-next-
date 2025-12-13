@@ -13,10 +13,10 @@ export default function Page() {
   return (
     <>
         <Hero />
-        {/* <Header/> */}
-        {/* <About /> */}
-        {/* <Skills /> */}
-        {/* <Projects /> */}
+        <Header/>
+        <About />
+        <Skills />
+        <Projects />
         <Services />
         <ContactForm/>
     </>
