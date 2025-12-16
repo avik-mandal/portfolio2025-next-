@@ -15,6 +15,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Header />
         <main className="max-w-[1100px] mx-auto p-6">{children}</main>
          <Footer />
+         
       </body>
     </html>
   )
