@@ -1,47 +1,95 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import { Sparkles, ArrowRight, Github, Linkedin, Mail, Code2, Zap, Heart } from "lucide-react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import {
+  Sparkles,
+  ArrowRight,
+  Github,
+  Linkedin,
+  Mail,
+  Code2,
+  Zap,
+  Heart,
+} from "lucide-react";
 
 export default function Hero() {
   const heroRef = useRef<HTMLElement | null>(null);
+
+  /* ------------------------------
+     Reduced Motion & Device Checks
+  ------------------------------ */
+  const prefersReducedMotion = useMemo(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    []
+  );
+
+  const isDesktop = useMemo(
+    () => typeof window !== "undefined" && window.innerWidth >= 768,
+    []
+  );
+
+  /* ------------------------------
+     Mouse Tracking (Desktop Only)
+  ------------------------------ */
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const [typedText, setTypedText] = useState("");
-  const [currentRole, setCurrentRole] = useState(0);
-  
-  const roles = [
-    "Frontend Developer",
-    "UI/UX Designer", 
-    "React Specialist",
-    "Problem Solver"
-  ];
 
-  // Track mouse
   useEffect(() => {
-    const onMove = (e: MouseEvent) =>
-      setMouse({ x: e.clientX, y: e.clientY });
+    if (!isDesktop || prefersReducedMotion) return;
+
+    let raf = 0;
+    const onMove = (e: MouseEvent) => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        setMouse({ x: e.clientX, y: e.clientY });
+      });
+    };
+
     window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
-  }, []);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("mousemove", onMove);
+    };
+  }, [isDesktop, prefersReducedMotion]);
 
-  // Typing animation
+  /* ------------------------------
+     Typing Animation (Optimized)
+  ------------------------------ */
+  const roles = useMemo(
+    () => ["Frontend Developer", "UI/UX Designer", "React Specialist", "Problem Solver"],
+    []
+  );
+
+  const [typedText, setTypedText] = useState("");
+  const [roleIndex, setRoleIndex] = useState(0);
+
   useEffect(() => {
+    if (prefersReducedMotion) {
+      setTypedText(roles[0]);
+      return;
+    }
+
+    const full = roles[roleIndex];
     let timeout: NodeJS.Timeout;
-    const currentText = roles[currentRole];
-    
-    if (typedText.length < currentText.length) {
-      timeout = setTimeout(() => {
-        setTypedText(currentText.slice(0, typedText.length + 1));
-      }, 100);
+
+    if (typedText.length < full.length) {
+      timeout = setTimeout(
+        () => setTypedText(full.slice(0, typedText.length + 1)),
+        90
+      );
     } else {
       timeout = setTimeout(() => {
         setTypedText("");
-        setCurrentRole((prev) => (prev + 1) % roles.length);
-      }, 2000);
+        setRoleIndex((i) => (i + 1) % roles.length);
+      }, 1800);
     }
-    
-    return () => clearTimeout(timeout);
-  }, [typedText, currentRole, roles]);
 
+    return () => clearTimeout(timeout);
+  }, [typedText, roleIndex, roles, prefersReducedMotion]);
+
+  /* ------------------------------
+     Stats
+  ------------------------------ */
   const stats = [
     { icon: <Code2 className="w-5 h-5" />, value: "50+", label: "Projects" },
     { icon: <Zap className="w-5 h-5" />, value: "3+", label: "Years" },
@@ -52,36 +100,39 @@ export default function Hero() {
     <section
       id="home"
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 py-20 overflow-hidden "
+      aria-label="Hero section"
+      className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 py-24 overflow-hidden"
     >
-      {/* Background Effects */}
+      {/* ================= Background Effects ================= */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        {/* Animated Blobs */}
+        {/* Blob 1 */}
         <div
-          className="absolute w-96 h-96 md:w-[600px] md:h-[600px] rounded-full blur-3xl opacity-30"
+          aria-hidden
+          className="absolute w-[520px] h-[520px] rounded-full blur-3xl opacity-30 transition-transform duration-300"
           style={{
-            background: "radial-gradient(circle, rgba(59, 243, 255, 0.3), transparent 70%)",
-            left: `${Math.max(0, 10 + mouse.x / 40)}px`,
-            top: `${Math.max(0, 10 + mouse.y / 40)}px`,
-            transition: "all 0.3s ease-out",
+            background:
+              "radial-gradient(circle, rgba(59,243,255,0.35), transparent 70%)",
+            transform: prefersReducedMotion
+              ? "translate(10%, 10%)"
+              : `translate(${mouse.x / 35}px, ${mouse.y / 35}px)`,
           }}
         />
 
+        {/* Blob 2 */}
         <div
-          className="absolute w-80 h-80 md:w-[500px] md:h-[500px] rounded-full blur-3xl opacity-25"
+          aria-hidden
+          className="absolute right-0 bottom-0 w-[460px] h-[460px] rounded-full blur-3xl opacity-25 transition-transform duration-300"
           style={{
-            background: "radial-gradient(circle, rgba(147, 51, 234, 0.25), transparent 70%)",
-            right: `${Math.max(0, 10 + mouse.x / 50)}px`,
-            bottom: `${Math.max(0, 20 + mouse.y / 50)}px`,
-            transition: "all 0.3s ease-out",
+            background:
+              "radial-gradient(circle, rgba(147,51,234,0.3), transparent 70%)",
+            transform: prefersReducedMotion
+              ? "translate(-10%, -10%)"
+              : `translate(${-mouse.x / 45}px, ${-mouse.y / 45}px)`,
           }}
         />
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 " />
       </div>
 
-      {/* Main Content */}
+      {/* ================= Main Content ================= */}
       <div className="w-full max-w-6xl mx-auto text-center relative z-10">
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-6 backdrop-blur-sm">
@@ -91,9 +142,9 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* Main Heading */}
+        {/* Heading */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4 text-white">
-          Hi, I'm{" "}
+          Hi, I&apos;m{" "}
           <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
             Avik Mandal
           </span>
@@ -101,9 +152,14 @@ export default function Hero() {
 
         {/* Animated Role */}
         <div className="h-10 md:h-12 mb-4">
-          <p className="text-xl md:text-2xl font-bold text-gray-300">
+          <p
+            className="text-xl md:text-2xl font-bold text-gray-300"
+            aria-live="polite"
+          >
             {typedText}
-            <span className="inline-block w-0.5 h-6 md:h-8 bg-cyan-400 ml-1 animate-pulse" />
+            {!prefersReducedMotion && (
+              <span className="inline-block w-0.5 h-6 md:h-8 bg-cyan-400 ml-1 animate-pulse" />
+            )}
           </p>
         </div>
 
@@ -114,15 +170,13 @@ export default function Hero() {
         </p>
 
         {/* Stats */}
-        <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
           {stats.map((stat, i) => (
-            <div 
-              key={i} 
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 hover:border-cyan-500/30 transition-all"
+            <div
+              key={i}
+              className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:border-cyan-500/30 transition-all"
             >
-              <div className="text-cyan-400">
-                {stat.icon}
-              </div>
+              <div className="text-cyan-400">{stat.icon}</div>
               <div className="text-left">
                 <div className="text-lg font-bold text-white">{stat.value}</div>
                 <div className="text-xs text-gray-400">{stat.label}</div>
@@ -131,11 +185,11 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+        {/* CTA */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
           <a
             href="#projects"
-            className="w-full sm:w-auto group px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center gap-2 shadow-lg hover:shadow-cyan-500/50 hover:scale-105 transition-all text-white font-semibold"
+            className="group px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold flex items-center justify-center gap-2 hover:scale-105 transition-transform"
           >
             View My Work
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -143,49 +197,49 @@ export default function Hero() {
 
           <a
             href="#contact"
-            className="w-full sm:w-auto px-8 py-4 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 hover:border-cyan-500/50 transition-all backdrop-blur-sm text-white font-semibold"
+            className="px-8 py-4 rounded-xl border border-white/20 bg-white/5 hover:border-cyan-500/50 transition-all text-white font-semibold"
           >
             Get in Touch
           </a>
         </div>
 
         {/* Social Links */}
-        <div className="flex items-center justify-center gap-3 mb-8">
+        <div className="flex justify-center gap-3 mb-8">
           <a
             href="https://github.com/avik-mandal"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-cyan-500/50 transition-all hover:scale-110"
             aria-label="GitHub"
+            className="p-3 rounded-lg bg-white/5 border border-white/10 hover:border-cyan-500/50 transition"
           >
-            <Github className="w-5 h-5 text-gray-400 hover:text-cyan-400 transition-colors" />
+            <Github className="w-5 h-5 text-gray-400 hover:text-cyan-400" />
           </a>
 
           <a
             href="https://www.linkedin.com/in/avik-mandal-a901b7294"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-blue-500/50 transition-all hover:scale-110"
             aria-label="LinkedIn"
+            className="p-3 rounded-lg bg-white/5 border border-white/10 hover:border-blue-500/50 transition"
           >
-            <Linkedin className="w-5 h-5 text-gray-400 hover:text-blue-400 transition-colors" />
+            <Linkedin className="w-5 h-5 text-gray-400 hover:text-blue-400" />
           </a>
 
           <a
             href="mailto:avikmandal2022@gmail.com"
-            className="p-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-purple-500/50 transition-all hover:scale-110"
             aria-label="Email"
+            className="p-3 rounded-lg bg-white/5 border border-white/10 hover:border-purple-500/50 transition"
           >
-            <Mail className="w-5 h-5 text-gray-400 hover:text-purple-400 transition-colors" />
+            <Mail className="w-5 h-5 text-gray-400 hover:text-purple-400" />
           </a>
         </div>
 
         {/* Tech Stack */}
-        <div className="flex flex-wrap items-center justify-center gap-2 px-4">
+        <div className="flex flex-wrap justify-center gap-2">
           {["React", "Next.js", "TypeScript", "Tailwind", "Node.js"].map((tech) => (
             <span
               key={tech}
-              className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm text-gray-300 hover:border-cyan-500/30 hover:text-cyan-400 transition-all"
+              className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm text-gray-300 hover:text-cyan-400 hover:border-cyan-500/30 transition"
             >
               {tech}
             </span>
@@ -194,11 +248,16 @@ export default function Hero() {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 rounded-full border-2 border-cyan-500/30 flex items-start justify-center p-2 bg-white/5 backdrop-blur-sm">
-          <div className="w-1 h-3 rounded-full bg-cyan-400 animate-pulse" />
+      {!prefersReducedMotion && (
+        <div
+          aria-hidden
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
+        >
+          <div className="w-6 h-10 rounded-full border-2 border-cyan-500/30 flex justify-center p-2 bg-white/5 backdrop-blur-sm">
+            <div className="w-1 h-3 rounded-full bg-cyan-400" />
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }
