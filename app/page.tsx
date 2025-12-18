@@ -8,6 +8,7 @@ import Services from "./services/page";
 import Projects from "./projects/page";
 import { Contact } from "lucide-react";
 import ContactForm from "./contact/page";
+import ResumePage from "./resume/page";
 
 export default function Page() {
   return (
@@ -18,6 +19,7 @@ export default function Page() {
         <Skills />
         <Projects />
         <Services />
+        <ResumePage/>
         <ContactForm/>
     </>
   );
