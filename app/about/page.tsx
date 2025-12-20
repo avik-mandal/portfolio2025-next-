@@ -11,6 +11,7 @@ import {
   Clock,
   Coffee,
 } from "lucide-react";
+import SectionHeading from "@/components/SectionHeading";
 
 import {
   Card,
@@ -161,13 +162,15 @@ export default function AboutPage() {
       <div className="max-w-7xl mx-auto space-y-20">
 
         {/* ---------- HEADER ---------- */}
-        <div className="text-center space-y-4">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-white">
-            About <span className="text-cyan-400">Me</span>
-          </h1>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-            Frontend Web Developer • MCA Graduate • NCC Certified
-          </p>
+        <div className="mb-12">
+          <SectionHeading
+            title="About"
+            highlight="Me"
+            subtitle="Frontend Web Developer • MCA Graduate • NCC Certified"
+            headingLevel="h1"
+            highlightColor="cyan"
+            titleSize="lg"
+          />
         </div>
 
         {/* ---------- PHOTO + STORY ---------- */}

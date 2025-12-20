@@ -11,6 +11,7 @@ import {
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import SectionHeading from "@/components/SectionHeading";
 
 /* ------------------ Animation ------------------ */
 const fadeUp = {
@@ -43,13 +44,14 @@ export default function Skills() {
       <div className="max-w-6xl mx-auto space-y-16">
 
         {/* HEADER */}
-        <div className="text-center space-y-4">
-          <h2 className="text-4xl md:text-6xl font-extrabold text-white">
-            Technical <span className="text-purple-400">Skills</span>
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Technologies I actively use while building real-world web applications
-          </p>
+        <div className="mb-12">
+          <SectionHeading
+            title="Technical"
+            highlight="Skills"
+            subtitle="Technologies I actively use while building real-world web applications"
+            highlightColor="purple"
+            titleSize="lg"
+          />
         </div>
 
         {/* SKILL GROUPS */}

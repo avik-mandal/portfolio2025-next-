@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { ArrowDownToLine, Eye, FileText, CheckCircle } from "lucide-react";
+import SectionHeading from "@/components/SectionHeading";
 
 export default function ResumePage() {
   return (
@@ -17,14 +18,16 @@ export default function ResumePage() {
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
-            My <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Resume</span>
-          </h1>
-
-          <p className="text-white/70 max-w-xl mx-auto">
-            Download my resume as a PDF or view a clean, web-friendly version
-            designed for recruiters and ATS systems.
-          </p>
+          <div className="mb-12">
+            <SectionHeading
+              title="My"
+              highlight="Resume"
+              subtitle="Download my resume as a PDF or view a clean, web-friendly version designed for recruiters and ATS systems."
+              headingLevel="h1"
+              titleSize="lg"
+              highlightColor="gradient-cyan"
+            />
+          </div>
         </div>
 
         {/* ---------------- Actions ---------------- */}

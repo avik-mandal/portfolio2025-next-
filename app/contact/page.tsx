@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowRight, CheckCircle, XCircle } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import SectionHeading from "@/components/SectionHeading";
 
 /* =========================
    CONFIG
@@ -169,16 +170,14 @@ ${form.message}`;
     >
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-3 text-white">
-            Let’s{" "}
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-              Connect
-            </span>
-          </h2>
-          <p className="text-gray-400">
-            Have a project or idea? Drop me a message.
-          </p>
+        <div className="mb-12">
+          <SectionHeading
+            title="Let's"
+            highlight="Connect"
+            subtitle="Have a project or idea? Drop me a message."
+            titleSize="md"
+            highlightColor="gradient-cyan"
+          />
         </div>
 
         {/* Form */}

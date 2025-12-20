@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from "react";
 import { ExternalLink, Star, X, ArrowLeft, ArrowRight } from "lucide-react";
+import SectionHeading from "@/components/SectionHeading";
 
 type Project = {
   id: number;
@@ -210,14 +211,14 @@ export default function Projects() {
   return (
     <section id="projects" className="relative py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-2">
-            Featured{" "}
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-              Projects
-            </span>
-          </h2>
-          <p className="text-gray-400 text-sm sm:text-base">Some of my recent work — tap to explore</p>
+        <div className="mb-10">
+          <SectionHeading
+            title="Featured"
+            highlight="Projects"
+            subtitle="Some of my recent work — tap to explore"
+            titleSize="md"
+            highlightColor="gradient-cyan"
+          />
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2">
