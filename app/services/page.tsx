@@ -91,12 +91,15 @@ export default function Services() {
         <div className="mb-12">
           <SectionHeading
             title="What I"
+
             highlight="Offer"
             subtitle="Services tailored to your needs"
             titleSize="md"
+
             highlightColor="gradient-pink"
           />
         </div>
+        
 
         {/* Services Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">

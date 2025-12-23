@@ -16,6 +16,10 @@ export default function SchemaPerson() {
       "@type": "CollegeOrUniversity",
       name: "Dr. B. C. Roy Engineering College, Durgapur",
     },
+
+
+
+    
     address: {
       "@type": "PostalAddress",
       addressLocality: "Kharagpur",

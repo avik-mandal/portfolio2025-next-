@@ -7,10 +7,10 @@ import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
 const SECTIONS = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
+  { id: "skills", label: "Skillss" },
   { id: "projects", label: "Projects" },
-  { id: "services", label: "Services" },
-  { id: "contact", label: "Contact" },
+  { id: "services", label: "Services1" },
+  { id: "contact", label: "Contact1" },
 ];
 
 export default function Footer() {
